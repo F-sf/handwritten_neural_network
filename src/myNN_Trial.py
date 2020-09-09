@@ -1,9 +1,7 @@
 # encoding=utf-8
-"""
-此代码未使用任何框架，实现了神经网络算法的基本原理，用于方便理解
-仅依靠CPU进行运算
-"""
+""" 无框架神经网络测试 """
 import mnist_loader
+
 # training_data:( array([0],[0.32551],..784个像素值作为输入x..,[0]),
 #                 array([0],[0],..10个输出y表示0-9..) )
 training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
@@ -11,10 +9,8 @@ training_data = list(training_data)
 validation_data = list(validation_data)
 test_data = list(test_data)
 
-#import network
 import my_network
 # 创建一个三层神经网络，一个有784个神经元的输入层，一个有30个神经元的隐藏层，和一个有10个神经元的输出层
-#my_net = network.Network([784, 30, 10])
 my_net = my_network.MyNetwork([784, 30, 10])
 
 import time

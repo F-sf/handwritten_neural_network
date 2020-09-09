@@ -1,4 +1,5 @@
 # encoding:utf-8
+""" pytorch下同结构神经网络测试 """
 import torch
 import numpy as np
 import mnist_loader
@@ -37,9 +38,9 @@ class Net(torch.nn.Module):
         return a_output
 
 # function 1
-_net = Net(n_feature=784, n_hidden=30, n_output=10)     # define the network
+net = Net(n_feature=784, n_hidden=30, n_output=10)     # define the network
 # function 2(quicker)
-net = torch.nn.Sequential(
+_net = torch.nn.Sequential(
     torch.nn.Linear(784, 30),
     torch.nn.Sigmoid(),
     torch.nn.Linear(30, 10),
@@ -56,7 +57,6 @@ for epoch in range(5):  # 5个epoch
     for step, (b_x, b_y) in enumerate(loader):  # 小批次训练
         out = net(b_x)                 # input x and predict based on x
         loss = loss_func(out, b_y)     # must be (1. nn output, 2. target), the target label is NOT one-hotted
-
         optimizer.zero_grad()   # clear gradients for next train
         loss.backward()         # backpropagation, compute gradients
         optimizer.step()        # apply gradients
@@ -67,7 +67,6 @@ from cv2 import cv2
 img = cv2.imread('./my_handwrite.png', cv2.IMREAD_GRAYSCALE)
 my_data = torch.tensor(((255 - img)/255.0*1.0).reshape(-1)).type(torch.FloatTensor)
 print("手写数字识别测试结果:")
-print(net.forward(my_data))
 print(torch.max(net.forward(my_data), 0)[1])
 print("使用pytorch，SGD算法，MSE均方差代价函数，同样的网络结构，同样的样本集，同样的迭代次数和mini_batch分批，同样的学习速率")
 print("Time Cost:{}s".format(end_time-start_time))

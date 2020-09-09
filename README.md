@@ -6,9 +6,9 @@
 >
 > 测试环境为python3
 >
-> 仅依赖numpy、random
+> 仅依赖numpy、random，测试代码依赖opencv-python
 >
-> 测试数据位MNIST手写数字数据集
+> 测试数据为MNIST手写数字数据集
 
 可运行.\src\myNN_Trial.py测试手写神经网络运行速度和准确率
 
